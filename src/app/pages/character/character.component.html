@@ -1,20 +1,4 @@
 <header class="container">
-<!--  <div class="row">
-    <h1 class="col-sm-6">Breaking Bad API</h1>
-    <input class="col-sm-1 text-left" type="text" [(ngModel)]="name">
-    <nav class="col-sm-1 text-right">
-      <div (click)="onSetStatus('allCharacters')" class="character-status-button">All</div>
-      <div (click)="onSetStatus('alive')" class="character-status-button">Alive</div>
-      <div (click)="onSetStatus('deceased')" class="character-status-button">Deceased</div>
-      <div (click)="onSetStatus('presumed dead')" class="character-status-button">Presumed Dead</div>
-    </nav>
-    <nav class="col-sm-1 text-right">
-      <div (click)="onSetSeason(1)" class="character-status-button">1</div>
-      <div (click)="onSetSeason(2)" class="character-status-button">2</div>
-      <div (click)="onSetSeason(3)" class="character-status-button">3</div>
-      <div (click)="onSetSeason(4)" class="character-status-button">4</div>
-    </nav>
-  </div>-->
   <nav class="navbar navbar-expand-lg fixed-top navbar-dark">
     <a class="navbar-brand" href="https://breakingbadapi.com/">Breaking Bad API</a>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -23,7 +7,12 @@
           <a class="nav-link" href="#">&#9650; <span class="sr-only">(current)</span></a>
         </li>
         <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownStatus" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <a class="nav-link dropdown-toggle"
+             href="#" id="navbarDropdownStatus"
+             role="button" data-toggle="dropdown"
+             aria-haspopup="true"
+             aria-expanded="false"
+          >
             Status
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
@@ -68,7 +57,8 @@
          | async
          | filterStatus:status
          | filterName:name
-         | filterSeason: seasonNumber"
+         | filterSeason: seasonNumber
+         |slice: (page * pageSize) : (page + 1) * pageSize"
     >
       <img src="{{ character.img }}" width="70%" height="70%">
         <ul class="character-prop">
@@ -79,11 +69,23 @@
           <li>seasons: {{ character.appearance }}</li>
         </ul>
         <div class="character-quote">
-          <div [routerLink]="['quotes', character.name]" class="character-quote-button" >{{ character.name }} Say</div>
+          <div
+            [routerLink]="['quotes', character.name]"
+            class="character-quote-button"
+          >
+            {{ character.name }} Say
+          </div>
         </div>
     </div>
   </div>
 </section>
-<mat-paginator [pageSizeOptions]="[5,10,20]" showFirstLastButtons></mat-paginator>
 
+<mat-paginator
+  [pageSizeOptions]="[5,10]"
+  (page)="changePage($event)"
+  [pageSize]="pageSize"
+  [pageIndex]="page"
+  [length]="(characters | async)?.length"
+>
+</mat-paginator>
 

@@ -13,6 +13,8 @@ import { FilterNamePipe } from './core/pipes/filter-name.pipe';
 import { FilterSeasonPipe } from './core/pipes/filter-season.pipe';
 import {MatPaginatorModule} from '@angular/material/paginator';
 
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -29,8 +31,7 @@ import {MatPaginatorModule} from '@angular/material/paginator';
     HttpClientModule,
     AppRoutingModule,
     FormsModule,
-    MatPaginatorModule
-
+    MatPaginatorModule,
   ],
   providers: [CharacterApiService],
   bootstrap: [AppComponent]
